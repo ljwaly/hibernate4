@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.lamp.hibernate.pojo.Customer" table="t_customer" lazy="false">
+		<id name="id">
+			<generator class="native"></generator>
+		</id>
+		<property name="name"></property>
+		<property name="city"></property>
+		<set name="orders" fetch="select" lazy="extra">
+			<key column="cid"></key>
+			<one-to-many class="com.lamp.hibernate.pojo.Order" />
+		</set>
+		<query name="query1">
+		from Customer
+	</query>
+		
+	</class>
+	
+	
+	<!-- 编写命名查询的语句 强调：所有的语句后面都不加分号结尾 -->
+	<!-- 编写命名查询的语句 不管这个写在class里面还是写在外面,name的命名要具有实际意义 -->
+	<query name="customer.hql.queryAll">
+		from Customer
+	</query>
+	<sql-query name="query4">
+		select * from t_customer
+	</sql-query>
+
+</hibernate-mapping>
